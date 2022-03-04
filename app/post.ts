@@ -9,25 +9,21 @@ export type Post = {
   title: string;
 };
 
+export type PostMarkdownAttributes = {
+  title: string;
+};
+
 type NewPost = {
   title: string;
   slug: string;
   markdown: string;
 };
 
-export type PostMarkdownAttributes = {
-  title: string;
-};
-
 const postsPath = path.join(__dirname, "..", "posts");
 
-function isValidPostAttributes(
-  attributes: any
-): attributes is PostMarkdownAttributes {
-  return attributes?.title;
-}
+const isValidPostAttributes = (attributes: any): attributes is PostMarkdownAttributes => attributes?.title;
 
-export async function getPosts() {
+export  const getPosts = async () => {
   const dir = await fs.readdir(postsPath);
   
   return Promise.all(
@@ -53,7 +49,7 @@ export async function getPosts() {
   );
 }
 
-export async function getPost(slug: string) {
+export const getPost = async (slug: string) => {
   const filepath = path.join(postsPath, slug + ".md");
   const file = await fs.readFile(filepath);
 
@@ -71,7 +67,7 @@ export async function getPost(slug: string) {
   return { slug, html, title: attributes.title };
 }
 
-export async function createPost(post: NewPost) {
+export const createPost = async (post: NewPost) => {
   const md = `---\ntitle: ${post.title}\n---\n\n${post.markdown}`;
 
   await fs.writeFile(

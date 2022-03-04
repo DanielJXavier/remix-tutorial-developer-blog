@@ -5,7 +5,7 @@ import type { Post } from "~/post";
 
 export const loader = async () => getPosts();
 
-export default function Posts() {
+const Posts = () => {
   const posts = useLoaderData<Post[]>();
 
   return (
@@ -21,3 +21,5 @@ export default function Posts() {
     </main>
   );
 }
+
+export default Posts;

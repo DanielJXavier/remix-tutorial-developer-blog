@@ -12,10 +12,12 @@ export const loader: LoaderFunction = async ({
   return getPost(params.slug);
 };
 
-export default function PostSlug() {
+const PostSlug = () => {
   const post = useLoaderData();
 
   return (
     <main dangerouslySetInnerHTML={{ __html: post.html }} />
   );
 }
+
+export default PostSlug;

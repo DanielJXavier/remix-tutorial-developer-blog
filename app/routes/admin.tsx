@@ -2,13 +2,14 @@ import { Outlet, Link, useLoaderData } from "remix";
 
 import { getPosts } from "~/post";
 import type { Post } from "~/post";
+
 import adminStyles from "~/styles/admin.css";
 
 export const links = () => [{ rel: "stylesheet", href: adminStyles }];
 
 export const loader = async () => getPosts();
 
-export default function Admin() {
+const Admin = () => {
   const posts = useLoaderData<Post[]>();
   
   return (
@@ -31,3 +32,5 @@ export default function Admin() {
     </div>
   );
 }
+
+export default Admin;

@@ -27,6 +27,7 @@ export const action: ActionFunction = async ({
   const markdown = formData.get("markdown");
 
   const errors: PostError = {};
+
   if (!title) errors.title = true;
   if (!slug) errors.slug = true;
   if (!markdown) errors.markdown = true;
@@ -38,12 +39,13 @@ export const action: ActionFunction = async ({
   invariant(typeof title === "string");
   invariant(typeof slug === "string");
   invariant(typeof markdown === "string");
+  
   await createPost({ title, slug, markdown });
 
   return redirect("/admin");
 };
 
-export default function NewPost() {
+const NewPost = () => {
   const errors = useActionData();
   const transition = useTransition();
 
@@ -83,3 +85,5 @@ export default function NewPost() {
     </Form>
   );
 }
+
+export default NewPost;
